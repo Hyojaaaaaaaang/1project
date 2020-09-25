@@ -1,0 +1,202 @@
+import java.util.Scanner;
+
+public class Omok {
+	public static void main(String[] args) {
+		// TODO Auto-generated method stub
+
+		Scanner scan = new Scanner(System.in);
+		int maxNum = 10;
+		
+		int[][]map = new int[maxNum][maxNum];
+		int turn = 0 ;
+		int win1 = 0 ; int win2 = 0; 
+		
+		while(true) {		
+			
+			System.out.println();
+			System.out.println("========오목게임========");
+			
+			System.out.print(" ");
+			for(int i =0; i<maxNum; i++) {
+				System.out.print(" "+i);
+			}
+			
+			System.out.println();
+			
+			for(int i = 0; i<maxNum; i++) {
+				System.out.print(i+" ");
+				
+				for(int j =0; j<maxNum; j++) {
+			
+					System.out.print(map[i][j]+" ");
+				}
+				System.out.println();
+			}
+			
+			if(win1==1) {
+				System.out.println("플레이어1의 승리입니다. ");
+				break; 
+			}
+			
+			if(win2==1) {
+				System.out.println("플레이어2의 승리입니다. ");
+				break; 
+			}
+			
+			if(turn%2==0) {
+				System.out.println("플레이어1 y좌표를 입력해주세요 : ");
+				int p1Y = scan.nextInt();
+				System.out.println("플레이어1 x좌표를 입력해주세요 : ");
+				int p1X = scan.nextInt();
+				for(int i = 0; i<maxNum; i++) {
+					for(int j =0; j<maxNum; j++) {
+						if(i==p1Y&&j==p1X&&map[i][j]==0) {
+							map[i][j] = 1; 
+						}
+					}
+				}
+				turn+=1;
+			}
+						
+			if(turn%2==1) {
+				System.out.println("플레이어2 y좌표를 입력해주세요 : ");
+				int p2Y = scan.nextInt();
+				System.out.println("플레이어2 x좌표를 입력해주세요 : ");
+				int p2X = scan.nextInt();
+				for(int i = 0; i<maxNum; i++) {
+					for(int j =0; j<maxNum; j++) {
+						if(i==p2Y&&j==p2X&&map[i][j]==0) {
+							map[i][j] = 2; 
+						}
+					}
+				}
+				turn+=1;
+			}
+			
+			//가로검사
+			
+			for(int i =0; i<maxNum; i++) {
+				int check = 0 ; 
+				for(int j = 0 ; j<maxNum; j++) {
+					if(map[i][j]==1) {
+						check = check + 1;
+					}
+					else {
+						check = 0 ;
+					}
+					if(check == 5) {
+						win1 = win1 + 1;
+					}
+				
+				}
+			}
+			
+			for(int i =0; i<maxNum; i++) {
+				int check = 0 ; 
+				for(int j = 0 ; j<maxNum; j++) {
+					if(map[i][j]==2) {
+						check = check + 1;
+					}
+					else {
+						check = 0 ;
+					}
+					if(check == 5) {
+						win2 = win2 + 1;
+					}
+				}
+				
+			}
+			
+			//세로검사
+			
+			for(int j =0; j<maxNum; j++) {
+				int check = 0 ; 
+				for(int i = 0 ; i<maxNum; i++) {
+					if(map[i][j]==1) {
+						check = check + 1;
+					}
+					else {
+						check = 0 ;
+					}
+					if(check == 5) {
+						win1 = win1 + 1;
+					}
+				}
+				
+			}
+			
+			for(int j =0; j<maxNum; j++) {
+				int check = 0 ; 
+				for(int i = 0 ; i<maxNum; i++) {
+					if(map[i][j]==2) {
+						check = check + 1;
+					}
+					else {
+						check = 0 ;
+					}
+					if(check == 5) {
+						win2 = win2 + 1;
+					}
+				}
+				
+			}
+			
+			//대각선 검사
+			
+			int check1_1 = 0; 
+			int check1_2 = 0 ;
+			for(int i = 0 ; i<maxNum ; i++) {
+				int j = i ;
+				if(map[i][j]==1) {
+					check1_1 = check1_1 + 1; 
+				}
+				else {
+					check1_1 =0;
+				}
+				if(check1_1==5) {
+					win1 = win1 + 1;
+				}
+			}
+			for(int i = 0 ; i<maxNum ; i++) {
+				int j = i ;
+				if(map[i][j]==2) {
+					check1_2 = check1_2 + 1; 
+				}
+				else {
+					check1_2 =0;
+				}
+				if(check1_2==5) {
+					win2 = win2 + 1;
+				}
+			}
+			
+			int check2_1 = 0; 
+			int check2_2 = 0 ;
+			for(int i = 0 ; i<maxNum ; i++) {
+				int j = 9-i ;
+				if(map[i][j]==1) {
+					check2_1 = check2_1 + 1; 
+				}
+				else {
+					check2_1 =0;
+				}
+				if(check2_1==5) {
+					win1 = win1 + 1;
+				}
+			}
+			
+			for(int i = 0 ; i<maxNum ; i++) {
+				int j = 9-i ;
+				if(map[i][j]==2) {
+					check2_2 = check2_2 + 1; 
+				}
+				else {
+					check2_2 =0;
+				}
+				if(check2_2==5) {
+					win2 = win2 + 1;
+				}
+			}
+		}
+	}
+}
